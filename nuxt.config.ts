@@ -1,4 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true }
-})
+  css: ['/layouts/global.css'],
+  devtools: { enabled: true },
+  nitro: {
+    devServer: {
+      watch: ['./app.vue', './components', './pages'],
+    },
+  },
+});

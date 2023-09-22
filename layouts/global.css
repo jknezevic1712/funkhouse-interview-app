@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'RM Neue';
+  src: local('RM Neue'), url('/assets/RMNeue-Regular.woff') format('truetype');
+
+  font-family: 'RM Neue Italic';
+  src: local('RM Neue Italic'),
+    url('/assets/RMNeue-Italic.woff') format('truetype');
+}
