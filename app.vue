@@ -1,73 +1,25 @@
-<script setup lang="ts">
-const route = useRoute();
-
-// const { data, pending, error } = await useFetch(
-//   () =>
-//     'https://raw.githubusercontent.com/funkhaus/technical-assessment/master/db.json'
-// );
-
-// console.log('data ', data.value);
-// console.log('pending ', pending);
-// console.log('error ', error);
-</script>
-
 <template>
   <NuxtLayout>
-    <div></div>
+    <Header />
+    <HomeTemplate :data="dataValue" />
   </NuxtLayout>
-
-  <!-- <NuxtExampleLayout
-    repo="nuxt/examples"
-    example="routing/pages"
-  > -->
-  <!-- <NuxtLoadingIndicator /> -->
-  <!-- <NuxtPage /> -->
-
-  <!-- <template> -->
-  <!-- <nav class="flex align-center gap-4 p-4">
-    <NuxtLink
-      to="/"
-      class="n-link-base"
-    >
-      Home
-    </NuxtLink>
-    <NuxtLink
-      to="/about"
-      class="n-link-base"
-    >
-      About
-    </NuxtLink>
-    <NuxtLink
-      to="/parent"
-      class="n-link-base"
-    >
-      Parent (index)
-    </NuxtLink>
-    <NuxtLink
-      to="/parent/b"
-      class="n-link-base"
-    >
-      Parent (b)
-    </NuxtLink>
-    <button
-      class="n-link-base"
-      @click="$router.push(`/parent/reload-${(Math.random() * 100).toFixed()}`)"
-    >
-      Keyed child
-    </button>
-    <button
-      class="n-link-base"
-      @click="$router.push(`/parent/static-${(Math.random() * 100).toFixed()}`)"
-    >
-      Non-keyed child
-    </button>
-  </nav> -->
-  <!-- </template> -->
-
-  <!-- <template #footer>
-    <div class="">
-      Current route: <code>{{ route.path }}</code>
-    </div>
-  </template> -->
-  <!-- </NuxtExampleLayout> -->
 </template>
+
+<script setup lang="ts">
+import HomeTemplate from './components/templates/HomeTemplate.vue';
+import Header from './components/molecules/header/Header.vue';
+
+// types
+import Data from './types/data';
+
+const { data, pending, error } = await useFetch(
+  () =>
+    'https://raw.githubusercontent.com/funkhaus/technical-assessment/master/db.json'
+);
+
+const dataValue: Data = JSON.parse(data.value as string);
+
+// console.log('data ', data.value);
+// console.log('pending ', pending.value);
+// console.log('error ', error.value);
+</script>

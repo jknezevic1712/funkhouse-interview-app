@@ -1,6 +1,5 @@
 <template>
   <div class="layout">
-    <Header />
     <slot />
   </div>
 </template>
@@ -8,21 +7,22 @@
 <style>
 html {
   font-family: 'RM Neue';
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .layout {
   background-color: #000;
-  /* min-height: 100dvh; */
-  /* height: 100%; */
-  /* width: 100%; */
-  padding: 2rem;
+  min-height: 100dvh;
+  padding: 1rem 2rem;
 
   .text {
     font-size: 24px;
-  }
-
-  .nav-title {
-    font-size: 18px;
   }
 }
 
