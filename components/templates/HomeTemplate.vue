@@ -1,19 +1,43 @@
+<script setup lang="ts">
+// types
+import { Data } from '~/types/data';
+// components
+import Card from '../molecules/card/Card.vue';
+
+const props = defineProps<{
+  data: Data;
+}>();
+const { data } = props;
+
+// SEO
+useSeoMeta({
+  title: { textContent: data.page.title },
+  ogTitle: data.page.title,
+});
+</script>
+
 <template>
-  <div>
-    <p>Template</p>
+  <div class="home">
+    <Card
+      v-for="(page, idx) in data.pages"
+      :key="idx"
+      :page="page"
+    />
   </div>
 </template>
 
-<script setup lang="ts">
-// types
-import Data from '~/types/data';
+<style>
+.home {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 2rem;
+  gap: 1rem;
+}
 
-const props = defineProps({
-  data: {
-    required: true,
-  },
-});
-const data = props.data as Data;
-
-console.log('DATA ', data);
-</script>
+@media (min-width: 1024px) {
+  .home {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 1.5rem 3rem;
+  }
+}
+</style>

@@ -7,7 +7,4 @@ export default defineNuxtConfig({
       watch: ['./app.vue', './components', './pages'],
     },
   },
-  alias: {
-    '@': './',
-  },
 });

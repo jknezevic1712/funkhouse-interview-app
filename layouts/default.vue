@@ -20,10 +20,8 @@ body {
   background-color: #000;
   min-height: 100dvh;
   padding: 1rem 2rem;
-
-  .text {
-    font-size: 24px;
-  }
+  position: relative;
+  z-index: 0;
 }
 
 h1,

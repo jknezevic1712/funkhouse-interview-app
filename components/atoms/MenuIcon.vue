@@ -1,0 +1,74 @@
+<script setup lang="ts">
+const showMenu = ref(false);
+
+function handleShowMenu() {
+  if (showMenu.value) {
+    showMenu.value = false;
+    return;
+  }
+
+  showMenu.value = true;
+  return;
+}
+</script>
+
+<template>
+  <div
+    class="hamburger-lines"
+    :class="{ 'transform-hamburger-lines': showMenu }"
+    @click="handleShowMenu"
+  >
+    <span
+      class="line line-1"
+      :class="{ 'transform-line-1': showMenu }"
+    ></span>
+    <span
+      class="line line-2"
+      :class="{ 'transform-line-2': showMenu }"
+    ></span>
+  </div>
+</template>
+
+<style>
+.hamburger-lines {
+  cursor: pointer;
+  display: block;
+  height: 26px;
+  width: 32px;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.4s ease-in-out;
+}
+
+.hamburger-lines .line {
+  display: block;
+  height: 3px;
+  width: 100%;
+  border-radius: 10px;
+  background: #fdc760;
+}
+
+.hamburger-lines .line-1 {
+  transform-origin: 0% 0%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.hamburger-lines .line-2 {
+  transform-origin: 0% 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.transform-hamburger-lines {
+  gap: 1.2rem;
+}
+
+.transform-line-1 {
+  transform: rotate(45deg);
+}
+
+.transform-line-2 {
+  transform: rotate(-45deg);
+}
+</style>
