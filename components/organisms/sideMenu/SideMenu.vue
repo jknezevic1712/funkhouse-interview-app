@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MenuIcon from '~/components/atoms/MenuIcon.vue';
+import MenuIcon from '~/components/atoms/menuIcon/MenuIcon.vue';
 import Image from '~/components/molecules/image/Image.vue';
 </script>
 
