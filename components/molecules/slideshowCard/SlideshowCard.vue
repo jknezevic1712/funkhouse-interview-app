@@ -47,9 +47,9 @@ function handleSlideshowImages() {
 </script>
 
 <template>
-  <div class="card">
+  <div class="slideshow_card">
     <p
-      class="card-author_name"
+      class="slideshow_card-author_name"
       @mouseenter="startSlideshow()"
       @mouseleave="stopSlideshow()"
     >
@@ -58,11 +58,11 @@ function handleSlideshowImages() {
 
     <Transition name="cross-fade">
       <div
-        class="card-images-inner_container"
+        class="slideshow_card-images-inner_container"
         v-if="showSlideshow"
       >
         <div
-          class="card-image"
+          class="slideshow_card-image"
           v-bind:style="{
             'background-image':
               'url(' + allImages[currentSlideshowImage].src + ')',
@@ -75,7 +75,7 @@ function handleSlideshowImages() {
 </template>
 
 <style>
-.card {
+.slideshow_card {
   width: 100%;
   height: 75px;
   padding: 1rem;
@@ -84,12 +84,12 @@ function handleSlideshowImages() {
   align-items: center;
 }
 
-.card-author_name {
+.slideshow_card-author_name {
   font-size: 24px;
   padding: 0.5rem;
 }
 
-.card-images-outer_container {
+.slideshow_card-images-outer_container {
   position: absolute;
   top: 0;
   left: 0;
@@ -102,7 +102,7 @@ function handleSlideshowImages() {
   z-index: -1;
 }
 
-.card-images-inner_container {
+.slideshow_card-images-inner_container {
   position: absolute;
   top: 0;
   left: 0;
@@ -115,7 +115,7 @@ function handleSlideshowImages() {
   z-index: -1;
 }
 
-.card-image {
+.slideshow_card-image {
   height: 25dvh;
   width: 75dvw;
   background-repeat: no-repeat;
@@ -124,21 +124,21 @@ function handleSlideshowImages() {
 }
 
 @media (min-width: 768px) {
-  .card-image {
+  .slideshow_card-image {
     height: 40dvh;
     width: 80dvw;
   }
 }
 
 @media (min-width: 1440px) {
-  .card-image {
+  .slideshow_card-image {
     height: 80dvh;
     width: 80dvw;
   }
 }
 
 @media (min-width: 1920px) {
-  .card-image {
+  .slideshow_card-image {
     height: 80dvh;
     width: 80dvw;
   }
