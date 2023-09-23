@@ -32,12 +32,12 @@ function handleOpenMenu() {
   cursor: pointer;
   display: block;
   height: 26px;
-  width: 32px;
+  width: 25px;
   display: flex;
   gap: 0.5rem;
   flex-direction: column;
   justify-content: center;
-  transition: all 0.4s ease-in-out;
+  transition: all 150ms ease-in-out;
 }
 
 .hamburger-lines .line {
@@ -68,5 +68,11 @@ function handleOpenMenu() {
 
 .transform-line-2 {
   transform: rotate(-45deg);
+}
+
+@media (min-width: 768px) {
+  .hamburger-lines {
+    width: 32px;
+  }
 }
 </style>

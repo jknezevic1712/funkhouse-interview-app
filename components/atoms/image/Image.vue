@@ -6,43 +6,40 @@ const props = defineProps<{
     caption?: string;
     to?: string;
   };
-  imageType: 'card' | 'link' | 'other';
+  wrapWithFigure?: boolean;
 }>();
-const { imageData, imageType } = props;
+
+const { imageData, wrapWithFigure } = props;
 </script>
 
 <template>
-  <NuxtLink
-    :to="imageData.to ?? ''"
-    v-if="imageType === 'link'"
-  >
-    <figure>
-      <img
-        :src="imageData.src"
-        :alt="imageData.alt"
-        class="image-link"
-      />
-      <figcaption v-if="imageData.caption">{{ imageData.caption }}</figcaption>
-    </figure>
-  </NuxtLink>
-
-  <span v-if="imageType === 'card'">
+  <figure v-if="wrapWithFigure">
     <img
       :src="imageData.src"
       :alt="imageData.alt"
-      class="image-card"
+      class="image"
     />
-  </span>
+    <figcaption v-if="imageData.caption">{{ imageData.caption }}</figcaption>
+  </figure>
 
-  <span v-if="imageType === 'other'">
-    <img
-      :src="imageData.src"
-      :alt="imageData.alt"
-    />
-  </span>
+  <img
+    :src="imageData.src"
+    :alt="imageData.alt"
+    class="image"
+    v-else
+  />
 </template>
 
 <style>
+.image {
+  height: inherit;
+  width: inherit;
+}
+
+.link {
+  cursor: pointer;
+}
+
 .image-link {
   height: 50px;
   width: 80px;
