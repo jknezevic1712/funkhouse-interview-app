@@ -59,19 +59,5 @@ export type Page = {
   content: string;
   excerpt: string;
   date: string;
-  featuredImage: {
-    sourceUrl: string;
-    sizes: string;
-    srcSet: string;
-    src: string;
-    id: string;
-    databaseId: number;
-    title: string;
-    altText: string;
-    caption: string;
-    mediaDetails: {
-      height: number;
-      width: number;
-    };
-  };
+  featuredImage: DataImage;
 };

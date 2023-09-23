@@ -1,24 +1,47 @@
 <script setup lang="ts">
 // types
-import { Page } from '~/types/data';
-// components
-import Image from '~/components/molecules/image/Image.vue';
+import { DataImage, Page } from '~/types/data';
 
 const props = defineProps<{
   page: Page;
+  images: DataImage[];
 }>();
 
-const { page: pageData } = props;
+const { page: pageData, images } = props;
 
-let showImage = ref(false);
+const allImages = [pageData.featuredImage, ...images];
 
-function handleShowingImage() {
-  if (showImage.value) {
-    showImage.value = false;
+let showSlideshow = ref(false);
+let currentSlideshowImage = ref(0);
+let interval: NodeJS.Timeout;
+
+function startSlideshow() {
+  if (interval && showSlideshow.value) {
     return;
   }
 
-  showImage.value = true;
+  showSlideshow.value = true;
+
+  interval = setInterval(handleSlideshowImages, 3000);
+}
+
+function stopSlideshow() {
+  if (interval) {
+    clearInterval(interval);
+  }
+
+  showSlideshow.value = false;
+}
+
+function handleSlideshowImages() {
+  if (showSlideshow.value) {
+    if (currentSlideshowImage.value === allImages.length) {
+      return (currentSlideshowImage.value = 0);
+    }
+
+    return currentSlideshowImage.value++;
+  }
+
   return;
 }
 </script>
@@ -26,26 +49,28 @@ function handleShowingImage() {
 <template>
   <div class="card">
     <p
-      @mouseenter="handleShowingImage()"
-      @mouseleave="handleShowingImage()"
+      class="card-author_name"
+      @mouseenter="startSlideshow()"
+      @mouseleave="stopSlideshow()"
     >
       {{ pageData.title }}
     </p>
-    <div
-      v-if="showImage"
-      class="card-image-wrapper"
-    >
-      <div class="card-image-inner">
-        <Image
-          image-type="card"
-          :image-data="{
-            src: pageData.featuredImage.src,
-            alt: pageData.featuredImage.altText,
-            caption: pageData.featuredImage.caption,
+
+    <Transition name="cross-fade">
+      <div
+        class="card-images-inner_container"
+        v-if="showSlideshow"
+      >
+        <div
+          class="card-image"
+          v-bind:style="{
+            'background-image':
+              'url(' + allImages[currentSlideshowImage].src + ')',
           }"
-        />
+          v-bind:key="allImages[currentSlideshowImage].id"
+        ></div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
 
@@ -59,11 +84,12 @@ function handleShowingImage() {
   align-items: center;
 }
 
-.card > p {
+.card-author_name {
   font-size: 24px;
+  padding: 0.5rem;
 }
 
-.card-image-wrapper {
+.card-images-outer_container {
   position: absolute;
   top: 0;
   left: 0;
@@ -71,10 +97,61 @@ function handleShowingImage() {
   min-width: 100dvw;
   overflow: hidden;
   display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: -1;
 }
 
-.card-image-inner {
-  margin: auto;
+.card-images-inner_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100dvh;
+  min-width: 100dvw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+}
+
+.card-image {
+  height: 25dvh;
+  width: 75dvw;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .card-image {
+    height: 40dvh;
+    width: 80dvw;
+  }
+}
+
+@media (min-width: 1440px) {
+  .card-image {
+    height: 80dvh;
+    width: 80dvw;
+  }
+}
+
+@media (min-width: 1920px) {
+  .card-image {
+    height: 80dvh;
+    width: 80dvw;
+  }
+}
+
+/* transition animation */
+.cross-fade-enter-active,
+.cross-fade-leave-active {
+  transition: opacity 0.25s ease-in-out;
+}
+
+.cross-fade-enter-from,
+.cross-fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -22,6 +22,7 @@ useSeoMeta({
       v-for="(page, idx) in data.pages"
       :key="idx"
       :page="page"
+      :images="data.images"
     />
   </div>
 </template>

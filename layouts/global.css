@@ -6,3 +6,26 @@
   src: local('RM Neue Italic'),
     url('/assets/RMNeue-Italic.woff') format('truetype');
 }
+
+html {
+  font-family: 'RM Neue';
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+p,
+span {
+  color: #fdc760;
+}
+
+figure {
+  margin: 0;
+}
