@@ -1,30 +1,28 @@
 <script setup lang="ts">
-const showMenu = ref(false);
+import { useAppStore } from '~/store/appStore';
+import { storeToRefs } from 'pinia';
 
-function handleShowMenu() {
-  if (showMenu.value) {
-    showMenu.value = false;
-    return;
-  }
+const appStore = useAppStore();
+const openMenu = storeToRefs(appStore).openMenu;
 
-  showMenu.value = true;
-  return;
+function handleOpenMenu() {
+  appStore.setOpenMenu();
 }
 </script>
 
 <template>
   <div
     class="hamburger-lines"
-    :class="{ 'transform-hamburger-lines': showMenu }"
-    @click="handleShowMenu"
+    :class="{ 'transform-hamburger-lines': openMenu }"
+    @click="handleOpenMenu"
   >
     <span
       class="line line-1"
-      :class="{ 'transform-line-1': showMenu }"
+      :class="{ 'transform-line-1': openMenu }"
     ></span>
     <span
       class="line line-2"
-      :class="{ 'transform-line-2': showMenu }"
+      :class="{ 'transform-line-2': openMenu }"
     ></span>
   </div>
 </template>
